@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pro.kosenkov.json_reader.dto.LroInfo;
+import pro.kosenkov.json_reader.pojo.ResponseLroDto;
 
 import java.io.File;
 import java.io.IOException;
@@ -17,7 +18,7 @@ import java.io.IOException;
 public class InfoController {
 
     @GetMapping(value = "/lro")
-    public LroInfo getInfo(String lroId) {
+    public ResponseLroDto getInfo(String lroId) {
 
         ObjectMapper mapper = new ObjectMapper();
 
@@ -32,9 +33,9 @@ public class InfoController {
             throw new RuntimeException("Файл не найден!");
         }
 
-        LroInfo lroInfo = null;
+        ResponseLroDto lroInfo = null;
         try {
-            lroInfo = mapper.readValue(file, LroInfo.class);
+            lroInfo = mapper.readValue(file, ResponseLroDto.class);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

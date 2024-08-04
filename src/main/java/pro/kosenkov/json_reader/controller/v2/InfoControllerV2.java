@@ -5,10 +5,15 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.io.support.ResourcePatternResolver;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import pro.kosenkov.json_reader.dto.LroInfo;
 
-// @RequestMapping("api/v2/info")
-// @RestController
+import java.io.IOException;
+
+@RequestMapping("api/v2/info")
+@RestController
 @RequiredArgsConstructor
 public class InfoControllerV2 {
 
@@ -16,16 +21,22 @@ public class InfoControllerV2 {
 
     private final ResourcePatternResolver resolver;
 
-    @Bean
-    public ObjectMapper objectMapper() {
-        ObjectMapper mapper = new ObjectMapper();
-        // игнорировать неизвестные поля, иначе было бы выброшено исключение UnrecognizedPropertyException
-        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-        return mapper;
-    }
 
+
+    @GetMapping
     public LroInfo getInfo(String lroIdRequest) {
-        return null;
+
+        String path = "classpath:json/" + lroIdRequest + ".json";
+
+        if (!resolver.getResource(path).exists()) {
+            throw new RuntimeException("Файл: " + path + " не найден");
+        }
+
+        try {
+            return mapper.readValue(resolver.getResource(path).getInputStream(), LroInfo.class);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }

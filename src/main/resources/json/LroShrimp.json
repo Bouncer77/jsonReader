@@ -41,12 +41,14 @@
         "type": 1,
         "registrationAddress": "162611, г. Нарышкино, ул. Наличный пер, дом 71, квартира 185"
       },
-      "licenses": {
-        "number": "4086 521980",
-        "type": 1,
-        "startDate": "1593858614",
-        "endDate": "1751625014"
-      }
+      "licenses": [
+        {
+          "number": "4086 521980",
+          "type": 1,
+          "startDate": "1593858614",
+          "endDate": "1751625014"
+        }
+      ]
     },
     {
       "login": "Silviya",
@@ -58,12 +60,14 @@
         "type": 1,
         "registrationAddress": "600901, г. Нарышкино, ул. Калужский 6-й пер, дом 34, квартира 79"
       },
-      "licenses": {
-        "number": "653425 2433244 23421",
-        "type": 2,
-        "startDate": "1662553814",
-        "endDate": "1725712214"
-      }
+      "licenses": [
+        {
+          "number": "653425 2433244 23421",
+          "type": 2,
+          "startDate": "1662553814",
+          "endDate": "1725712214"
+        }
+      ]
     }
   ]
 }
